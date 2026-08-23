@@ -1,26 +1,30 @@
 services:
-  # 1. FastAPI ML Backend Service
+  # 1. FastAPI ML Backend Service (Free Tier)
   - type: web
     name: aegis-aml-backend
     runtime: python
     rootDir: backend
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python -m uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.8
       - key: DATABASE_URL
-        fromDatabase:
-          name: aegis-aml-db
-          property: connectionString
+        sync: false
+      - key: AEGIS_SECRET_KEY
+        generateValue: true
       - key: FRONTEND_URL
-        value: https://aegis-aml-frontend.onrender.com
+        value: https://aegis-aml.vercel.app
+      - key: ALLOWED_ORIGINS
+        value: https://aegis-aml.vercel.app,http://localhost:3000
 
-  # 2. Next.js 3D Liquid Glass Frontend
+  # 2. Next.js 3D Liquid Glass Frontend (Free Tier - Alternative if deploying both on Render)
   - type: web
     name: aegis-aml-frontend
     runtime: node
     rootDir: frontend
+    plan: free
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
@@ -28,10 +32,3 @@ services:
         value: 20.11.0
       - key: NEXT_PUBLIC_API_URL
         value: https://aegis-aml-backend.onrender.com
-
-databases:
-  # 3. Managed PostgreSQL Database
-  - name: aegis-aml-db
-    databaseName: aegis_aml
-    user: aegis_user
-    plan: free
