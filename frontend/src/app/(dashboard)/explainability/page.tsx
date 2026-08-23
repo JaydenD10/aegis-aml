@@ -23,7 +23,7 @@ export default function ExplainabilityIndexPage() {
     setError('')
     setLoading(true)
     try {
-      const res = await authFetch(`http://127.0.0.1:8000/api/explainability/${id}`)
+      const res = await authFetch(`/api/explainability/${id}`)
       if (res.status === 404) {
         setError(`Transaction TX-${id} not found in workspace.`)
         setLoading(false)
@@ -105,7 +105,7 @@ function ExplainabilityTable() {
   const [fetchError, setFetchError] = useState(false)
 
   useEffect(() => {
-    authFetch('http://127.0.0.1:8000/api/explainability')
+    authFetch('/api/explainability')
       .then(r => r.ok ? r.json() : Promise.reject())
       .then(d => setItems(d.items || []))
       .catch(() => { setFetchError(true); setItems([]) })

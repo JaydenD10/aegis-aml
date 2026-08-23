@@ -23,7 +23,7 @@ export default function TransactionsPage() {
   const fetchTransactions = useCallback(async () => {
     setLoading(true)
     const skip = (page - 1) * limit
-    let url = `http://127.0.0.1:8000/api/transactions?skip=${skip}&limit=${limit}`
+    let url = `/api/transactions?skip=${skip}&limit=${limit}`
     if (risk && risk !== 'ALL') url += `&risk_band=${encodeURIComponent(risk)}`
     if (search) url += `&search=${encodeURIComponent(search)}`
 

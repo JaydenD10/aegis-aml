@@ -15,7 +15,7 @@ export default function WatchlistPage() {
   const fetchWatchlist = useCallback(async () => {
     setLoading(true)
     try {
-      const res = await authFetch('http://127.0.0.1:8000/api/watchlist')
+      const res = await authFetch('/api/watchlist')
       if (res.ok) {
         const data = await res.json()
         setItems(data.items || [])

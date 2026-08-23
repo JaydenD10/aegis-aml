@@ -27,7 +27,7 @@ export default function InvestigationsPage() {
   const fetchInvestigations = useCallback(async () => {
     setLoading(true)
     try {
-      const res = await authFetch('http://127.0.0.1:8000/api/investigations')
+      const res = await authFetch('/api/investigations')
       if (res.ok) {
         const data = await res.json()
         setItems(data.items || [])
@@ -50,7 +50,7 @@ export default function InvestigationsPage() {
     setCreateError('')
 
     try {
-      const res = await authFetch('http://127.0.0.1:8000/api/investigations', {
+      const res = await authFetch('/api/investigations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ target_id: targetId.trim(), target_type: targetType })

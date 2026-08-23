@@ -21,7 +21,7 @@ export default function NetworkPage() {
     setError('')
     setLoading(true)
     try {
-      const res = await authFetch(`http://127.0.0.1:8000/api/network/${id}`)
+      const res = await authFetch(`/api/network/${id}`)
       if (res.status === 404) {
         setError(`Account ACC-${id} not found in workspace.`)
         setLoading(false)

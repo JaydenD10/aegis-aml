@@ -16,7 +16,7 @@ export default function DriftAnalysisPage({ params }: { params: any }) {
 
   useEffect(() => {
     if (!accountId) return
-    authFetch(`http://127.0.0.1:8000/api/drift/${accountId}`)
+    authFetch(`/api/drift/${accountId}`)
       .then(res => res.ok ? res.json() : null)
       .then(d => {
         setData(d)

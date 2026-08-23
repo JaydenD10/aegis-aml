@@ -16,7 +16,7 @@ export default function TransactionDetailPage({ params }: { params: any }) {
 
   useEffect(() => {
     if (!id) return
-    authFetch(`http://127.0.0.1:8000/api/transactions/${id}`)
+    authFetch(`/api/transactions/${id}`)
       .then(res => res.ok ? res.json() : null)
       .then(d => {
         setData(d)

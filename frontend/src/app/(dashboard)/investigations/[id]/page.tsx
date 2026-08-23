@@ -21,12 +21,12 @@ export default function InvestigationWorkspace({ params }: { params: any }) {
 
   useEffect(() => {
     if (!id) return
-    authFetch(`http://127.0.0.1:8000/api/investigations/${id}`)
-      .then(r => r.json())
+    authFetch(`/api/investigations/${id}`)
+      .then(res => res.ok ? res.json() : null)
       .then(d => {
         setData(d)
-        setNotes(d.notes || "")
-        setStatus(d.status || "OPEN")
+        if (d?.notes) setNotes(d.notes)
+        if (d?.status) setStatus(d.status)
         setLoading(false)
       })
       .catch(() => setLoading(false))
@@ -37,7 +37,7 @@ export default function InvestigationWorkspace({ params }: { params: any }) {
     setSaving(true)
     setSavedSuccess(false)
     try {
-      await authFetch(`http://127.0.0.1:8000/api/investigations/${id}`, {
+      await authFetch(`/api/investigations/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ notes, status })

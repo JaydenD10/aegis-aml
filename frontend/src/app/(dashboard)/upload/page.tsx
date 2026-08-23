@@ -87,7 +87,7 @@ export default function UploadPage() {
       setTimeout(() => setCurrentStep('Executing Feature Engineering & ML Pipeline...'), 600)
       setTimeout(() => setCurrentStep('Computing Behavioral Drift & Graph Topology...'), 1200)
 
-      const res = await authFetch('http://127.0.0.1:8000/api/upload/pipeline', {
+      const res = await authFetch('/api/upload/pipeline', {
         method: 'POST',
         body: formData,
       })

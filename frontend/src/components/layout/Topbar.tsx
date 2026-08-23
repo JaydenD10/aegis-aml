@@ -17,7 +17,7 @@ export function Topbar() {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    authFetch('http://127.0.0.1:8000/api/health')
+    authFetch('/api/health')
       .then((res) => setSystemOk(res.ok))
       .catch(() => setSystemOk(false))
   }, [authFetch])
@@ -42,7 +42,7 @@ export function Topbar() {
     setLoading(true)
     setIsOpen(true)
     try {
-      const res = await authFetch(`http://127.0.0.1:8000/api/search?q=${encodeURIComponent(val)}`)
+      const res = await authFetch(`/api/search?q=${encodeURIComponent(val)}`)
       if (res.ok) {
         const data = await res.json()
         setResults(data)

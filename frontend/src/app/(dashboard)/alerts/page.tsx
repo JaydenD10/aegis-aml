@@ -19,7 +19,7 @@ export default function AlertsPage() {
   const fetchAlerts = useCallback(async () => {
     setLoading(true)
     const skip = (page - 1) * limit
-    let url = `http://127.0.0.1:8000/api/alerts?skip=${skip}&limit=${limit}`
+    let url = `/api/alerts?skip=${skip}&limit=${limit}`
     if (search) url += `&search=${encodeURIComponent(search)}`
 
     try {

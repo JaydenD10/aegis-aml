@@ -10,7 +10,7 @@ export default function SettingsPage() {
   const [health, setHealth] = useState<any>(null)
 
   useEffect(() => {
-    authFetch("http://127.0.0.1:8000/api/health")
+    authFetch("/api/health")
       .then(res => res.ok ? res.json() : null)
       .then(d => d && setHealth(d))
       .catch(() => {})

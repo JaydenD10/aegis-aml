@@ -13,7 +13,7 @@ export default function AuditLogPage() {
   const fetchAuditLogs = useCallback(async () => {
     setLoading(true)
     try {
-      const res = await authFetch('http://127.0.0.1:8000/api/audit')
+      const res = await authFetch('/api/audit')
       if (res.ok) {
         const data = await res.json()
         setItems(data.items || [])

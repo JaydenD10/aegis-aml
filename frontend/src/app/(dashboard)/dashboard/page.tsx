@@ -33,9 +33,9 @@ export default function DashboardPage() {
     setLoading(true)
     try {
       const [statsRes, watchRes, txRes] = await Promise.all([
-        authFetch('http://127.0.0.1:8000/api/dashboard/stats'),
-        authFetch('http://127.0.0.1:8000/api/watchlist'),
-        authFetch('http://127.0.0.1:8000/api/transactions?limit=6'),
+        authFetch('/api/dashboard/stats'),
+        authFetch('/api/watchlist'),
+        authFetch('/api/transactions?limit=6'),
       ])
 
       if (statsRes.ok) {

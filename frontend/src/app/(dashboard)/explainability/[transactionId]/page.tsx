@@ -16,7 +16,7 @@ export default function ExplainabilityDetailPage({ params }: { params: any }) {
 
   useEffect(() => {
     if (!transactionId) return
-    authFetch(`http://127.0.0.1:8000/api/explainability/${transactionId}`)
+    authFetch(`/api/explainability/${transactionId}`)
       .then(res => res.ok ? res.json() : null)
       .then(d => {
         setData(d)

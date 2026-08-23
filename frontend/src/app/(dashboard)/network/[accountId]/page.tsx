@@ -16,7 +16,7 @@ export default function NetworkAnalysisPage({ params }: { params: any }) {
 
   useEffect(() => {
     if (!accountId) return
-    authFetch(`http://127.0.0.1:8000/api/network/${accountId}`)
+    authFetch(`/api/network/${accountId}`)
       .then(res => res.ok ? res.json() : null)
       .then(d => {
         setData(d)

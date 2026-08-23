@@ -17,8 +17,8 @@ export default function ReportsPage() {
     setLoading(true)
     try {
       const [invRes, statsRes] = await Promise.all([
-        authFetch('http://127.0.0.1:8000/api/investigations'),
-        authFetch('http://127.0.0.1:8000/api/dashboard/stats')
+        authFetch('/api/investigations'),
+        authFetch('/api/dashboard/stats')
       ])
       if (invRes.ok) {
         const invData = await invRes.json()

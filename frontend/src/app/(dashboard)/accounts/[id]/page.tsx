@@ -16,7 +16,7 @@ export default function AccountDetailPage({ params }: { params: any }) {
 
   useEffect(() => {
     if (!id) return
-    authFetch(`http://127.0.0.1:8000/api/accounts/${id}`)
+    authFetch(`/api/accounts/${id}`)
       .then(res => res.ok ? res.json() : null)
       .then(d => {
         setData(d)
