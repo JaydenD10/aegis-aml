@@ -40,7 +40,12 @@ export default function SignupPage() {
     setLoading(true)
 
     try {
-      await signup(name, email, password, confirmPassword)
+      const res = await signup(name, email, password, confirmPassword)
+      if (res && !res.success) {
+        setError(res.error || 'Registration failed.')
+        setLoading(false)
+        return
+      }
       router.push('/dashboard')
     } catch (err: any) {
       setError(err.message || 'Registration failed.')

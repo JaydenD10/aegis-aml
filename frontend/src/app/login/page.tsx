@@ -37,7 +37,12 @@ export default function LoginPage() {
     setLoading(true)
 
     try {
-      await login(email, password)
+      const res = await login(email, password)
+      if (res && !res.success) {
+        setError(res.error || 'Invalid credentials or connection error.')
+        setLoading(false)
+        return
+      }
       router.push('/dashboard')
     } catch (err: any) {
       setError(err.message || 'Invalid credentials or connection error.')
@@ -51,7 +56,12 @@ export default function LoginPage() {
     setEmail('analyst@aegisaml.corp')
     setPassword('password123')
     try {
-      await login('analyst@aegisaml.corp', 'password123')
+      const res = await login('analyst@aegisaml.corp', 'password123')
+      if (res && !res.success) {
+        setError(res.error || 'Demo analyst login failed.')
+        setLoading(false)
+        return
+      }
       router.push('/dashboard')
     } catch (err: any) {
       setError(err.message || 'Demo analyst login failed.')

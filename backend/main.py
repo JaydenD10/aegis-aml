@@ -37,16 +37,29 @@ app = FastAPI(title="AegisAML API", version="2.0.0")
 
 allowed_origins_env = os.environ.get("ALLOWED_ORIGINS", "")
 frontend_url_env = os.environ.get("FRONTEND_URL", "")
-cors_origins = ["*"]
+
+default_origins = [
+    "https://aegis-aml.vercel.app",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3088",
+    "http://127.0.0.1:3088",
+]
+
+cors_origins = default_origins.copy()
 if allowed_origins_env:
-    cors_origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
-elif frontend_url_env:
-    cors_origins = [frontend_url_env.strip(), "http://localhost:3000", "http://127.0.0.1:3000"]
+    for o in allowed_origins_env.split(","):
+        if o.strip() and o.strip() not in cors_origins:
+            cors_origins.append(o.strip())
+if frontend_url_env:
+    for o in frontend_url_env.split(","):
+        if o.strip() and o.strip() not in cors_origins:
+            cors_origins.append(o.strip())
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=cors_origins if cors_origins != ["*"] else ["*"],
-    allow_origin_regex=os.environ.get("CORS_ORIGIN_REGEX", None),
+    allow_origins=cors_origins,
+    allow_origin_regex=os.environ.get("CORS_ORIGIN_REGEX", r"https://.*\.vercel\.app"),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -568,7 +581,11 @@ def get_watchlist(
     ).join(
         models.Transaction, models.MLPrediction.tx_id == models.Transaction.tx_id
     ).filter(
-        models.MLPrediction.risk_band == 'CRITICAL'
+        or_(
+            models.MLPrediction.risk_band.in_(['CRITICAL', 'HIGH']),
+            models.MLPrediction.composite_score >= 0.5,
+            models.Transaction.is_fraud == True
+        )
     )
     
     if user and user.email != "analyst@aegisaml.corp":
@@ -578,7 +595,7 @@ def get_watchlist(
         else:
             return {"items": []}
 
-    results = query.limit(50).all()
+    results = query.order_by(desc(models.MLPrediction.composite_score)).limit(50).all()
     
     items = []
     seen = set()
@@ -587,9 +604,21 @@ def get_watchlist(
             seen.add(r.sender_account_id)
             items.append({
                 "account_id": r.sender_account_id,
-                "risk_band": r.risk_band,
-                "composite_score": r.composite_score,
+                "risk_band": r.risk_band or "HIGH",
+                "composite_score": r.composite_score or 0.85,
                 "reason": "Critical risk velocity and ML anomaly detected"
+            })
+            
+    # Also include manual watchlist entries
+    manual_wl = db.query(models.Watchlist).all()
+    for mw in manual_wl:
+        if mw.account_id not in seen:
+            seen.add(mw.account_id)
+            items.append({
+                "account_id": mw.account_id,
+                "risk_band": "HIGH",
+                "composite_score": 0.80,
+                "reason": mw.reason or "Manually flagged for priority monitoring"
             })
         
     return {"items": items}

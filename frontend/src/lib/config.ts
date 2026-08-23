@@ -1,7 +1,9 @@
-export const BACKEND_URL = 
+const rawBackendUrl = 
   process.env.NEXT_PUBLIC_API_URL || 
   process.env.NEXT_PUBLIC_BACKEND_URL || 
-  'http://127.0.0.1:8000'
+  'https://aegis-aml.onrender.com'
+
+export const BACKEND_URL = rawBackendUrl.replace(/\/+$/, '')
 
 export function getApiUrl(path: string): string {
   const cleanPath = path.startsWith('/') ? path : `/${path}`
