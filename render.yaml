@@ -1,0 +1,37 @@
+services:
+  # 1. FastAPI ML Backend Service
+  - type: web
+    name: aegis-aml-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: DATABASE_URL
+        fromDatabase:
+          name: aegis-aml-db
+          property: connectionString
+      - key: FRONTEND_URL
+        value: https://aegis-aml-frontend.onrender.com
+
+  # 2. Next.js 3D Liquid Glass Frontend
+  - type: web
+    name: aegis-aml-frontend
+    runtime: node
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
+      - key: NEXT_PUBLIC_API_URL
+        value: https://aegis-aml-backend.onrender.com
+
+databases:
+  # 3. Managed PostgreSQL Database
+  - name: aegis-aml-db
+    databaseName: aegis_aml
+    user: aegis_user
+    plan: free

@@ -1,0 +1,83 @@
+# ==========================================
+# AegisAML Root .gitignore
+# ==========================================
+
+# Environment & Secret Files (NEVER COMMIT SECRETS)
+.env
+.env.*
+*.env
+!.env.example
+!backend/.env.example
+*.pem
+*.key
+*.cert
+*.crt
+
+# Node & Next.js Build Artifacts
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+frontend/out/
+build/
+frontend/build/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
+
+# Python & ML Artifacts
+__pycache__/
+backend/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & Logs
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS & Editor Artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Large Datasets and Processed ML Files
+data/*.csv
+*.csv
+data/processed_transactions.csv
+data/test_predictions.csv
+data/transactions.csv
+*.parquet
+*.pkl
+*.h5
+

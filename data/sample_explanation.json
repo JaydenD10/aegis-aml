@@ -1,0 +1,120 @@
+{
+    "tx_id": 1126548,
+    "features": {
+        "TX_AMOUNT": {
+            "value": 118.8,
+            "shap_contribution": -0.11199668278017387,
+            "direction": "decreases risk"
+        },
+        "log_amount": {
+            "value": 4.785823685681349,
+            "shap_contribution": -0.1290558923289593,
+            "direction": "decreases risk"
+        },
+        "is_large_txn": {
+            "value": 0.0,
+            "shap_contribution": 0.0005833945410023307,
+            "direction": "increases risk"
+        },
+        "payment_format_enc": {
+            "value": 0.0,
+            "shap_contribution": 0.0,
+            "direction": "decreases risk"
+        },
+        "rolling_mean_amt_send": {
+            "value": 118.8,
+            "shap_contribution": -0.00019747423624799662,
+            "direction": "decreases risk"
+        },
+        "rolling_std_amt_send": {
+            "value": 0.0,
+            "shap_contribution": -0.13240303810336967,
+            "direction": "decreases risk"
+        },
+        "rolling_txn_count_send": {
+            "value": 20.0,
+            "shap_contribution": -0.0071062673837578045,
+            "direction": "decreases risk"
+        },
+        "acct_total_txns_send": {
+            "value": 188.0,
+            "shap_contribution": -0.014410392038562895,
+            "direction": "decreases risk"
+        },
+        "acct_avg_amount_send": {
+            "value": 118.8,
+            "shap_contribution": 0.0005323021829506059,
+            "direction": "increases risk"
+        },
+        "acct_max_amount_send": {
+            "value": 118.8,
+            "shap_contribution": -0.0041262141970841194,
+            "direction": "decreases risk"
+        },
+        "acct_max_mean_ratio_send": {
+            "value": 0.9999999158249228,
+            "shap_contribution": -0.08277409910814679,
+            "direction": "decreases risk"
+        },
+        "rolling_mean_amt_recv": {
+            "value": 157.207,
+            "shap_contribution": 0.00010094578062174943,
+            "direction": "increases risk"
+        },
+        "rolling_std_amt_recv": {
+            "value": 106.41439623170344,
+            "shap_contribution": -0.0004830217832096881,
+            "direction": "decreases risk"
+        },
+        "acct_total_txns_recv": {
+            "value": 113.0,
+            "shap_contribution": -0.004628629758480698,
+            "direction": "decreases risk"
+        },
+        "sender_out_degree": {
+            "value": 11.0,
+            "shap_contribution": 0.0018104842590349066,
+            "direction": "increases risk"
+        },
+        "sender_in_degree": {
+            "value": 4.0,
+            "shap_contribution": -0.000632718256024254,
+            "direction": "decreases risk"
+        },
+        "receiver_in_degree": {
+            "value": 7.0,
+            "shap_contribution": 0.0006578205139132793,
+            "direction": "increases risk"
+        },
+        "receiver_out_degree": {
+            "value": 9.0,
+            "shap_contribution": 0.0008120126994268674,
+            "direction": "increases risk"
+        },
+        "sender_total_degree": {
+            "value": 15.0,
+            "shap_contribution": -0.0003360168659915113,
+            "direction": "decreases risk"
+        },
+        "receiver_total_degree": {
+            "value": 16.0,
+            "shap_contribution": 0.00013329616769595327,
+            "direction": "increases risk"
+        },
+        "sender_pagerank": {
+            "value": 4.367008282052469e-05,
+            "shap_contribution": -0.0010348903272034285,
+            "direction": "decreases risk"
+        },
+        "receiver_pagerank": {
+            "value": 0.0002254441924263,
+            "shap_contribution": 0.0005337274733224,
+            "direction": "increases risk"
+        },
+        "drift_score": {
+            "value": 0.0,
+            "shap_contribution": -0.015891258149376135,
+            "direction": "decreases risk"
+        }
+    }
+}
